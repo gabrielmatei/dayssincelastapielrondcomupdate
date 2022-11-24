@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<link rel="alternate" href="https://github.com/shannonmoeller/dayssincelastjavascriptframework" />
 <meta name="viewport" content="width=device-width" />
 <meta charset="utf-8" />
 
-<title>Days Since Last JavaScript Framework?</title>
+<title>Days Since Last api.elrond.com update?</title>
 
 <style>
   body,
@@ -36,6 +35,25 @@
 
 <body>
   <main>
-    <strong>0</strong>
+    <strong id="text">...</strong>
   </main>
+
+  <script>
+    const loadPage = async () => {
+      const branchDetails = await fetch('https://api.github.com/repos/ElrondNetwork/api.elrond.com/branches/development')
+        .then(response => response.json());
+
+      const lastCommitDateRaw = branchDetails.commit.commit.committer.date;
+
+      const currentDate = new Date();
+      const lastCommitDate = new Date(lastCommitDateRaw);
+
+      const diffInMs   = currentDate - lastCommitDate;
+      const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+      document.getElementById("text").innerText = parseInt(diffInDays)
+    };
+
+    loadPage();
+  </script>
 </body>
