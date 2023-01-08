@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width" />
   <link rel="icon" href="./favicon.ico">
 
-  <title>Days Since Last api.elrond.com update</title>
+  <title>Days Since Last api.multiversx.com update</title>
 
   <style>
     body,
@@ -45,7 +45,7 @@
 
   <script>
     const getLastCommitHash = async () => {
-      const about = await fetch('https://api.elrond.com/about')
+      const about = await fetch('https://api.multiversx.com/about')
         .then(response => response.json());
 
       return about.appVersion;
@@ -53,7 +53,7 @@
 
     const getLastCommitDate = async () => {
       const lastCommitHash = await getLastCommitHash();
-      const lastCommit = await fetch(`https://api.github.com/repos/ElrondNetwork/api.elrond.com/commits/${lastCommitHash}`)
+      const lastCommit = await fetch(`https://api.github.com/repos/multiversx/mx-api-service/commits/${lastCommitHash}`)
         .then(response => response.json());
 
       const lastCommitDateRaw = lastCommit.commit.committer.date;
